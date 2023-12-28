@@ -1,0 +1,19 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master  # Modify this to match your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Choose your preferred runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy code to server
+        run: |
+          scp -r ./src/ subrat@20.172.195.131:/home/subrat/script
+        # Alternatively, you can use rsync, FTP, or other methods for file transfer
