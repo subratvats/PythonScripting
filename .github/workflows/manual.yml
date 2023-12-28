@@ -16,4 +16,6 @@ jobs:
       - name: Copy code to server
         run: |
           scp -r ./src/ subrat@20.172.195.131:/home/subrat/script
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PAT_TOKEN }}
         # Alternatively, you can use rsync, FTP, or other methods for file transfer
