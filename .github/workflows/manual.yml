@@ -13,15 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
     
-      - name: Create SSH Directory
-        run: mkdir -p ~/.ssh
-
-      - name: Write SSH Private Key
-        run: echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - name: Copy code to Azure VM
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+          scp -o StrictHostKeyChecking=no -r ./PythonScripting/src/ subrat@20.172.195.131:/home/subrat/script
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Copy code to server
-        run: |
-           scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} -r ./PythonScripting/src/ subrat@20.172.195.131:/home/subrat/script
-        # Alternatively, you can use rsync, FTP, or other methods for file transfer
