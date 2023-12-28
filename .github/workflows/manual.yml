@@ -16,7 +16,7 @@ jobs:
       - name: Copy code to server
         run: |
           #ssh-keyscan -H 20.172.195.131 >> ~/.ssh/known_hosts
-          scp -i ${{ secrets.SSH_PRIVATE_KEY }} -r ./src/ subrat@20.172.195.131:/home/subrat/script
+          scp -i ${{ secrets.SSH_PRIVATE_KEY }} ./PythonScripting/src/ subrat@20.172.195.131:/home/subrat/script
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         # Alternatively, you can use rsync, FTP, or other methods for file transfer
